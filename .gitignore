@@ -3,3 +3,5 @@
 /video
 /ocr_crnn/dataset
 /run
+stream-video/node_modules
+videos
