@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mô Phỏng Logic 2 Vạch tại Ngã 4</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #333;
+            font-weight: 700;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            /* Cho phép xuống dòng trên màn hình nhỏ */
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            align-items: flex-start;
+        }
+
+        .intersection-diagram {
+            position: relative;
+            width: 500px;
+            height: 600px;
+            background-color: #525252;
+            /* Màu đường nhựa */
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #333;
+            flex-shrink: 0;
+            max-width: 100%;
+            /* Đảm bảo vừa trên mobile */
+        }
+
+        /* --- Vẽ ngã tư --- */
+        .road-v {
+            /* Đường dọc */
+            position: absolute;
+            width: 250px;
+            /* 2 làn, mỗi làn 125px */
+            height: 100%;
+            left: 125px;
+            /* Căn giữa đường dọc */
+            background-color: #525252;
+            box-shadow: 0 0 0 4px #444;
+            /* Viền đường */
+        }
+
+        .road-h {
+            /* Đường ngang */
+            position: absolute;
+            width: 100%;
+            height: 250px;
+            /* 2 làn, mỗi làn 125px */
+            top: 175px;
+            /* Căn giữa đường ngang */
+            background-color: #525252;
+            box-shadow: 0 0 0 4px #444;
+            /* Viền đường */
+        }
+
+        /* Vỉa hè/Cỏ 4 góc */
+        .corner {
+            position: absolute;
+            width: 129px;
+            /* (500 - 250)/2 + 4px viền */
+            height: 179px;
+            /* (600 - 250)/2 + 4px viền */
+            background: #27ae60;
+            /* Màu cỏ */
+            z-index: 1;
+        }
+
+        .corner-tl {
+            top: -4px;
+            left: -4px;
+        }
+
+        .corner-tr {
+            top: -4px;
+            right: -4px;
+        }
+
+        .corner-bl {
+            bottom: -4px;
+            left: -4px;
+        }
+
+        .corner-br {
+            bottom: -4px;
+            right: -4px;
+        }
+
+
+        /* --- Làn đường --- */
+        .lane-divider-v {
+            position: absolute;
+            left: 250px;
+            /* Giữa ngã 4 */
+            top: 0;
+            height: 100%;
+            width: 8px;
+            border-left: 8px dashed #a0a0a0;
+            z-index: 2;
+        }
+
+        /* Chỉ vẽ vạch nét đứt cho đường dọc, bên ngoài giao lộ */
+        .lane-divider-v-top {
+            position: absolute;
+            left: 250px;
+            top: 0;
+            height: 175px;
+            border-left: 8px dashed #a0a0a0;
+            z-index: 2;
+        }
+
+        .lane-divider-v-bottom {
+            position: absolute;
+            left: 250px;
+            bottom: 0;
+            height: 175px;
+            /* 600 - 425 */
+            border-left: 8px dashed #a0a0a0;
+            z-index: 2;
+        }
+
+        .lane-divider-h-left {
+            position: absolute;
+            left: 0;
+            top: 300px;
+            width: 125px;
+            border-top: 8px dashed #a0a0a0;
+            z-index: 2;
+        }
+
+        .lane-divider-h-right {
+            position: absolute;
+            right: 0;
+            top: 300px;
+            width: 125px;
+            border-top: 8px dashed #a0a0a0;
+            z-index: 2;
+        }
+
+        /* --- Đèn giao thông (cho đường dọc) --- */
+        .traffic-light {
+            position: absolute;
+            top: 430px;
+            /* Ngay vạch dừng */
+            left: 380px;
+            /* Bên phải đường */
+            width: 30px;
+            height: 70px;
+            background: #222;
+            border-radius: 5px;
+            padding: 5px;
+            z-index: 10;
+        }
+
+        .light {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #444;
+            margin: 5px auto;
+        }
+
+        .light.red {
+            background: #e74c3c;
+            box-shadow: 0 0 10px #e74c3c;
+        }
+
+
+        /* --- Các vạch ảo --- */
+        .line {
+            position: absolute;
+            height: 8px;
+            font-size: 14px;
+            color: white;
+            font-weight: bold;
+            z-index: 3;
+            /* Nằm trên đường, dưới xe */
+        }
+
+        /* VẠCH 1 (HẸP) - Chỉ bắt làn đi thẳng (làn trái) */
+        #stop-line {
+            background: #e74c3c;
+            width: 158px;
+            left: 168px;
+            top: 419px;
+            box-shadow: 0 0 10px #e74c3c;
+        }
+
+        /* VẠCH 2 (RỘNG) - Bắt cả 2 làn */
+        #confirm-line {
+            background: #f1c40f;
+            /* Màu vàng */
+            width: 240px;
+            /* Cả 2 làn (125 -> 375) */
+            left: 130px;
+            top: 300px;
+            /* Sâu trong ngã 4 */
+            box-shadow: 0 0 10px #f1c40f;
+        }
+
+        .line::after {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 200px;
+        }
+
+        #stop-line::after {
+            content: "VẠCH 1 (STOP_LINE)";
+        }
+
+        #confirm-line::after {
+            content: "VẠCH 2 (FAILSAFE_LINE)";
+        }
+
+        /* --- Xe cộ & Animation --- */
+        .vehicle {
+            position: absolute;
+            width: 50px;
+            height: 90px;
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        /* Xe vi phạm (Đi thẳng) */
+        #vehicle-straight {
+            background-color: #e100ff;
+            /* Đỏ đậm */
+            left: 145.5px;
+            /* (125 + 250)/2 = 187.5 (giữa làn trái) */
+            transform: translateX(-50%);
+            top: 500px;
+            animation: move-straight 5s linear infinite;
+            width: 40px;
+        }
+
+        #vehicle-mid {
+            background-color: #c0392b;
+            /* Đỏ đậm */
+            left: 253px;
+            /* (125 + 250)/2 = 187.5 (giữa làn trái) */
+            transform: translateX(-50%);
+            top: 500px;
+            animation: move-straight 5s linear infinite;
+            width: 40px;
+        }
+
+
+
+        /* Xe rẽ phải (Không vi phạm) */
+        #vehicle-right {
+            background-color: #2980b9;
+            /* Xanh */
+            /* left: 312.5px; */
+            left: 351.5px;
+            /* (250 + 375)/2 = 312.5 (giữa làn phải) */
+            transform: translateX(-50%);
+            top: 570px;
+            animation: move-right 5s linear infinite;
+            width: 40px;
+        }
+
+        /* Xe đi thẳng: Vượt Vạch 1, Vượt Vạch 2 */
+        @keyframes move-straight {
+            0% {
+                transform: translate(-50%, 0);
+            }
+
+            /* Bắt đầu (top: 500) */
+            20% {
+                transform: translate(-50%, -60px);
+            }
+
+            /* Vượt Vạch 1 (top: 450) */
+            50% {
+                transform: translate(-50%, -210px);
+            }
+
+            /* Vượt Vạch 2 (top: 300) */
+            100% {
+                transform: translate(-50%, -550px);
+            }
+
+            /* Kết thúc (thoát ngã 4) */
+        }
+
+        /* Xe rẽ phải: LÁCH Vạch 1, Vượt Vạch 2 */
+        @keyframes move-right {
+            0% {
+                transform: translate(-50%, 0) rotate(0deg);
+            }
+
+            /* Bắt đầu (top: 500) */
+            /* Xe ở làn phải, không cắt Vạch 1 (ở 130-245) */
+            40% {
+                transform: translate(-50%, -210px) rotate(0deg);
+            }
+
+            /* Vượt Vạch 2 (top: 300) */
+            100% {
+                transform: translate(100px, -250px) rotate(90deg);
+            }
+
+            /* Rẽ phải vào đường ngang */
+        }
+
+        /* --- Đường đi mô phỏng (Path) --- */
+        .path {
+            position: absolute;
+            border-style: dashed;
+            opacity: 0.7;
+            z-index: 9;
+        }
+
+        /* Đường đi thẳng */
+        #path-straight {
+            top: 0;
+            left: 187.5px;
+            height: 100%;
+            border-left: 3px dashed #c0392b;
+        }
+
+        /* Đường rẽ phải */
+        #path-right-v {
+            /* Đoạn dọc */
+            top: 300px;
+            left: 312.5px;
+            height: 300px;
+            border-left: 3px dashed #2980b9;
+        }
+
+        #path-right-h {
+            /* Đoạn ngang */
+            top: 300px;
+            /* Ngay vạch 2 */
+            left: 312.5px;
+            width: 187.5px;
+            /* Đi ra lề */
+            border-top: 3px dashed #2980b9;
+        }
+
+        /* --- Bảng giải thích --- */
+        .explanation {
+            flex-grow: 1;
+            min-width: 300px;
+            /* Đảm bảo có chiều rộng tối thiểu */
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .explanation h2 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #f0f2f5;
+            padding-bottom: 10px;
+        }
+
+        .explanation p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .explanation strong {
+            color: #c0392b;
+        }
+
+        .explanation strong.safe {
+            color: #2980b9;
+        }
+
+        #btn-replay {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        #btn-replay:hover {
+            background-color: #3498db;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .intersection-diagram {
+                width: 100%;
+                max-width: 500px;
+                /* Giữ nguyên kích thước tối đa */
+                height: 600px;
+                /* Giữ chiều cao */
+            }
+
+            .explanation {
+                width: 100%;
+                max-width: 500px;
+                /* Cùng kích thước với diagram */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Mô Phỏng Logic Vi Phạm tại Ngã 4 (Hệ Thống 2 Vạch)</h1>
+
+    <div class="container">
+        <!-- Bảng mô phỏng -->
+        <div class="intersection-diagram">
+            <!-- Vỉa hè 4 góc -->
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
+
+            <!-- Đường xá -->
+            <div class="road-v"></div>
+            <div class="road-h"></div>
+
+            <!-- Vạch chia làn -->
+            <div class="lane-divider-v-top"></div>
+            <div class="lane-divider-v-bottom"></div>
+            <div class="lane-divider-h-left"></div>
+            <div class="lane-divider-h-right"></div>
+
+            <!-- Đèn giao thông -->
+            <div class="traffic-light">
+                <div class="light red"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+            </div>
+
+            <!-- Các vạch ảo (Đã sửa lại logic) -->
+            <div class="line" id="stop-line"></div>
+            <!-- Vạch 1 (Hẹp) -->
+            <div class="line" id="confirm-line"></div> <!-- Vạch 2 (Rộng) -->
+
+            <!-- Đường đi (để tham khảo) -->
+            <!-- <div class="path" id="path-straight"></div> -->
+            <!-- <div class="path" id="path-right-v"></div>
+            <div class="path" id="path-right-h"></div> -->
+
+            <!-- Các xe -->
+            <div class="vehicle" id="vehicle-straight">ID 03</div>
+            <div class="vehicle" id="vehicle-right">ID 02</div>
+            <div class="vehicle" id="vehicle-mid">ID 01</div>
+
+        </div>
+
+        <!-- Bảng giải thích (Logic giữ nguyên) -->
+        <div class="explanation">
+            <h2>Luồng Logic Hoạt Động (Khi Đèn Đỏ)</h2>
+            <p>Mô phỏng 3 xe đi từ
+                <strong>hướng Nam (dưới)</strong> lên khi đèn đỏ.
+            </p>
+            <p>
+                <strong>Xe Vi Phạm (ID 01 - Đi thẳng):</strong>
+            <ol>
+                <li>Vượt <strong>Vạch 1 (Đỏ) => GHI NHẬN VI PHẠM</strong>
+                </li>
+
+            </ol>
+            </p>
+            <p>
+                <strong class="safe">Xe Rẽ Phải (ID 02):</strong>
+            <ol>
+                <li>Xe đi ở làn phải, <strong>LÁCH</strong> qua <strong>Vạch 1 (Đỏ)</strong> (vì vạch này hẹp, chỉ ở làn
+                    trái).</li>
+                <li>Xe vượt <strong>Vạch 2 (Vàng)</strong> (vì vạch này rộng, bắt cả 2 làn) khi rẽ phải.</li>
+                <li>Hệ thống kiểm tra: Xe có <code>PASSED_2</code> nhưng <code>NOT_PASSED_1</code>. <strong>=> KHÔNG VI
+                        PHẠM.</strong></li>
+            </ol>
+            </p>
+            <button id="btn-replay" onclick="replayAnimations()">Replay Animation</button>
+        </div>
+    </div>
+
+    <script>
+        // Script đơn giản để replay animation
+        function replayAnimations() {
+            const vehicles = document.querySelectorAll('.vehicle');
+            vehicles.forEach(vehicle => {
+                // Remove and re-add animation
+                vehicle.style.animation = 'none';
+                void vehicle.offsetWidth; // Trigger DOM reflow
+                vehicle.style.animation = null;
+
+                // Gán lại animation name để chạy
+                if (vehicle.id === 'vehicle-straight') {
+                    vehicle.style.animationName = 'move-straight';
+                } else if (vehicle.id === 'vehicle-right') {
+                    vehicle.style.animationName = 'move-right';
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
