@@ -1485,7 +1485,7 @@ class TrafficViolationSystem {
             violation.owner.phone;
         document.getElementById("owner-email").textContent =
             violation.owner.email;
-        document.getElementById("owner-photo").src = violation.owner.photo;
+        document.getElementById("owner-photo").src = "./run/nhat.jpeg";
         document.getElementById("owner-license").textContent =
             violation.owner.license;
         document.getElementById("owner-license-class").textContent =
