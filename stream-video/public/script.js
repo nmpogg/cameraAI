@@ -319,6 +319,256 @@ class TrafficViolationSystem {
                 image: this.generateViolationImage("65E-22222"),
                 status: "Đã xử lý",
             },
+            {
+                id: 5,
+                licensePlate: "65E-22222",
+                time: "2024-11-10T13:30:45",
+                location: "Đường Sư Vạn Hạnh, Quận 10",
+                speed: "48 km/h",
+                vehicle: {
+                    brand: "Hyundai",
+                    model: "Elantra 1.6",
+                    color: "Bạc",
+                    type: "Ô tô con",
+                    year: "2020",
+                    engine: "1.6L",
+                    seats: 5,
+                    fuel: "Xăng",
+                    power: "128 HP",
+                    chassis: "KMHDN41BAML123456",
+                    engineNumber: "G4FG1234567",
+                    regNumber: "65E-22222",
+                    certNumber: "TG/2020/002222",
+                    regOffice: "Cục CSGT TP.HCM",
+                    regDate: "10/08/2020",
+                    expDate: "10/08/2025",
+                    purpose: "Cá nhân",
+                    condition: "Bình thường",
+                    insurance: "Bảo hiểm PVI",
+                    insuranceExp: "10/08/2025",
+                },
+                owner: {
+                    name: "Hoàng Văn Em",
+                    dob: "18/09/1982",
+                    gender: "Nam",
+                    cccd: "056789012345",
+                    cccdPlace: "Cục CSGT TP.HCM",
+                    cccdDate: "25/10/2021",
+                    ethnicity: "Kinh",
+                    nationality: "Việt Nam",
+                    address: "654 Đường MNO, Phường 12, Quận 10, TP.HCM",
+                    currentAddress: "654 Đường MNO, Phường 12, Quận 10, TP.HCM",
+                    phone: "0934567890",
+                    email: "hoangvanem@email.com",
+                    photo: this.generateAvatarSVG("HVE"),
+                    license: "056789012345",
+                    licenseClass: "B2",
+                    licenseDate: "08/04/2008",
+                    licensePlace: "Sở GT-VT TP.HCM",
+                },
+                image: this.generateViolationImage("65E-22222"),
+                status: "Đã xử lý",
+            },
+            {
+                id: 5,
+                licensePlate: "65E-22222",
+                time: "2024-11-10T13:30:45",
+                location: "Đường Sư Vạn Hạnh, Quận 10",
+                speed: "48 km/h",
+                vehicle: {
+                    brand: "Hyundai",
+                    model: "Elantra 1.6",
+                    color: "Bạc",
+                    type: "Ô tô con",
+                    year: "2020",
+                    engine: "1.6L",
+                    seats: 5,
+                    fuel: "Xăng",
+                    power: "128 HP",
+                    chassis: "KMHDN41BAML123456",
+                    engineNumber: "G4FG1234567",
+                    regNumber: "65E-22222",
+                    certNumber: "TG/2020/002222",
+                    regOffice: "Cục CSGT TP.HCM",
+                    regDate: "10/08/2020",
+                    expDate: "10/08/2025",
+                    purpose: "Cá nhân",
+                    condition: "Bình thường",
+                    insurance: "Bảo hiểm PVI",
+                    insuranceExp: "10/08/2025",
+                },
+                owner: {
+                    name: "Hoàng Văn Em",
+                    dob: "18/09/1982",
+                    gender: "Nam",
+                    cccd: "056789012345",
+                    cccdPlace: "Cục CSGT TP.HCM",
+                    cccdDate: "25/10/2021",
+                    ethnicity: "Kinh",
+                    nationality: "Việt Nam",
+                    address: "654 Đường MNO, Phường 12, Quận 10, TP.HCM",
+                    currentAddress: "654 Đường MNO, Phường 12, Quận 10, TP.HCM",
+                    phone: "0934567890",
+                    email: "hoangvanem@email.com",
+                    photo: this.generateAvatarSVG("HVE"),
+                    license: "056789012345",
+                    licenseClass: "B2",
+                    licenseDate: "08/04/2008",
+                    licensePlace: "Sở GT-VT TP.HCM",
+                },
+                image: this.generateViolationImage("65E-22222"),
+                status: "Đã xử lý",
+            },
+            {
+                id: 5,
+                licensePlate: "65E-22222",
+                time: "2024-11-10T13:30:45",
+                location: "Đường Sư Vạn Hạnh, Quận 10",
+                speed: "48 km/h",
+                vehicle: {
+                    brand: "Hyundai",
+                    model: "Elantra 1.6",
+                    color: "Bạc",
+                    type: "Ô tô con",
+                    year: "2020",
+                    engine: "1.6L",
+                    seats: 5,
+                    fuel: "Xăng",
+                    power: "128 HP",
+                    chassis: "KMHDN41BAML123456",
+                    engineNumber: "G4FG1234567",
+                    regNumber: "65E-22222",
+                    certNumber: "TG/2020/002222",
+                    regOffice: "Cục CSGT TP.HCM",
+                    regDate: "10/08/2020",
+                    expDate: "10/08/2025",
+                    purpose: "Cá nhân",
+                    condition: "Bình thường",
+                    insurance: "Bảo hiểm PVI",
+                    insuranceExp: "10/08/2025",
+                },
+                owner: {
+                    name: "Hoàng Văn Em",
+                    dob: "18/09/1982",
+                    gender: "Nam",
+                    cccd: "056789012345",
+                    cccdPlace: "Cục CSGT TP.HCM",
+                    cccdDate: "25/10/2021",
+                    ethnicity: "Kinh",
+                    nationality: "Việt Nam",
+                    address: "654 Đường MNO, Phường 12, Quận 10, TP.HCM",
+                    currentAddress: "654 Đường MNO, Phường 12, Quận 10, TP.HCM",
+                    phone: "0934567890",
+                    email: "hoangvanem@email.com",
+                    photo: this.generateAvatarSVG("HVE"),
+                    license: "056789012345",
+                    licenseClass: "B2",
+                    licenseDate: "08/04/2008",
+                    licensePlace: "Sở GT-VT TP.HCM",
+                },
+                image: this.generateViolationImage("65E-22222"),
+                status: "Đã xử lý",
+            },
+            {
+                id: 5,
+                licensePlate: "65E-22222",
+                time: "2024-11-10T13:30:45",
+                location: "Đường Sư Vạn Hạnh, Quận 10",
+                speed: "48 km/h",
+                vehicle: {
+                    brand: "Hyundai",
+                    model: "Elantra 1.6",
+                    color: "Bạc",
+                    type: "Ô tô con",
+                    year: "2020",
+                    engine: "1.6L",
+                    seats: 5,
+                    fuel: "Xăng",
+                    power: "128 HP",
+                    chassis: "KMHDN41BAML123456",
+                    engineNumber: "G4FG1234567",
+                    regNumber: "65E-22222",
+                    certNumber: "TG/2020/002222",
+                    regOffice: "Cục CSGT TP.HCM",
+                    regDate: "10/08/2020",
+                    expDate: "10/08/2025",
+                    purpose: "Cá nhân",
+                    condition: "Bình thường",
+                    insurance: "Bảo hiểm PVI",
+                    insuranceExp: "10/08/2025",
+                },
+                owner: {
+                    name: "Hoàng Văn Em",
+                    dob: "18/09/1982",
+                    gender: "Nam",
+                    cccd: "056789012345",
+                    cccdPlace: "Cục CSGT TP.HCM",
+                    cccdDate: "25/10/2021",
+                    ethnicity: "Kinh",
+                    nationality: "Việt Nam",
+                    address: "654 Đường MNO, Phường 12, Quận 10, TP.HCM",
+                    currentAddress: "654 Đường MNO, Phường 12, Quận 10, TP.HCM",
+                    phone: "0934567890",
+                    email: "hoangvanem@email.com",
+                    photo: this.generateAvatarSVG("HVE"),
+                    license: "056789012345",
+                    licenseClass: "B2",
+                    licenseDate: "08/04/2008",
+                    licensePlace: "Sở GT-VT TP.HCM",
+                },
+                image: this.generateViolationImage("65E-22222"),
+                status: "Đã xử lý",
+            },
+            {
+                id: 5,
+                licensePlate: "65E-22222",
+                time: "2024-11-10T13:30:45",
+                location: "Đường Sư Vạn Hạnh, Quận 10",
+                speed: "48 km/h",
+                vehicle: {
+                    brand: "Hyundai",
+                    model: "Elantra 1.6",
+                    color: "Bạc",
+                    type: "Ô tô con",
+                    year: "2020",
+                    engine: "1.6L",
+                    seats: 5,
+                    fuel: "Xăng",
+                    power: "128 HP",
+                    chassis: "KMHDN41BAML123456",
+                    engineNumber: "G4FG1234567",
+                    regNumber: "65E-22222",
+                    certNumber: "TG/2020/002222",
+                    regOffice: "Cục CSGT TP.HCM",
+                    regDate: "10/08/2020",
+                    expDate: "10/08/2025",
+                    purpose: "Cá nhân",
+                    condition: "Bình thường",
+                    insurance: "Bảo hiểm PVI",
+                    insuranceExp: "10/08/2025",
+                },
+                owner: {
+                    name: "Hoàng Văn Em",
+                    dob: "18/09/1982",
+                    gender: "Nam",
+                    cccd: "056789012345",
+                    cccdPlace: "Cục CSGT TP.HCM",
+                    cccdDate: "25/10/2021",
+                    ethnicity: "Kinh",
+                    nationality: "Việt Nam",
+                    address: "654 Đường MNO, Phường 12, Quận 10, TP.HCM",
+                    currentAddress: "654 Đường MNO, Phường 12, Quận 10, TP.HCM",
+                    phone: "0934567890",
+                    email: "hoangvanem@email.com",
+                    photo: this.generateAvatarSVG("HVE"),
+                    license: "056789012345",
+                    licenseClass: "B2",
+                    licenseDate: "08/04/2008",
+                    licensePlace: "Sở GT-VT TP.HCM",
+                },
+                image: this.generateViolationImage("65E-22222"),
+                status: "Đã xử lý",
+            },
         ];
     }
 
@@ -1001,30 +1251,49 @@ class TrafficViolationSystem {
         const time = new Date(violation.time);
         const timeStr = time.toLocaleString("vi-VN");
 
-        const statusColors = {
-            "Chưa xử lý": "bg-yellow-100 text-yellow-800",
-            "Đã xử lý": "bg-green-100 text-green-800",
-            "Chờ xác nhận": "bg-blue-100 text-blue-800",
-        };
-
-        const statusColor =
-            statusColors[violation.status] || "bg-gray-100 text-gray-800";
-
         card.innerHTML = `
-            <div class="flex items-start justify-between mb-3">
-                <div>
-                    <h3 class="font-semibold text-lg text-gray-900">${violation.licensePlate}</h3>
-                </div>
-              
+            <div class="grid grid-cols-4">
+
+            <div class="col-span-2 flex mb-3">
+            <div>
+                <h3 class="font-semibold text-lg text-gray-900">${violation.licensePlate}</h3>
+            </div>
+          
+            
+            </div>
+
+            <div class="col-span-2">
+                <span class="px-2 py-1 rounded-full text-xs font-small text-red-500 bg-red-100 ">
+                    VƯỢT ĐÈN ĐỎ
+                </span>
+            </div>
+
+            <div class="col-span-2 ">
+            <div class="flex items-center text-sm text-gray-600">
+                <i class="fas fa-map-marker-alt w-4 mr-2"></i>
+                <span class="font-medium text-gray-700">ID: ${violation.id}</span>
+            </div>
+
+            <div class="flex items-center text-sm text-gray-600">
+                <i class="fas fa-clock w-4 mr-2"></i>
+                <span>${timeStr}</span>
+            </div>
+
+
+             <div class="flex items-center text-sm text-gray-600">
+                <i class="fas fa-car w-4 mr-2"></i>
+                <span>${violation.vehicle.type}</span>
+            </div>   
+            </div>
+
             </div>
             
 
             
             <div class="flex space-x-2">
-                <button class="flex-1 bg-blue-600 text-white py-2 px-3 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors view-details-btn" 
+                <button class="flex-1 rounded-md text-sm font-medium transition-colors view-details-btn" 
                         data-violation-id="${violation.id}">
-                    <i class="fas fa-eye mr-1"></i>
-                    Xem chi tiết
+                    <i class="fas fa-play-circle mr-1"></i>
                 </button>
             </div>
         `;
@@ -1249,3 +1518,89 @@ if (document.readyState !== "loading") {
     console.log("Document is already loaded, initializing immediately");
     initializeSystem();
 }
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const video = document.getElementById("surveillance-video");
+
+    if (!video) {
+        console.error("Không tìm thấy video element!");
+        return;
+    }
+
+    // Đây là đường dẫn mà server Express cung cấp ở bước 2
+    const hlsUrl = "http://localhost:3000/hls/playlist.m3u8";
+
+    if (Hls.isSupported()) {
+        // Nếu trình duyệt hỗ trợ HLS.js
+        console.log("Sử dụng HLS.js");
+        const hls = new Hls({
+            debug: true,
+            enableWorker: true,
+        });
+        hls.loadSource(hlsUrl);
+        hls.attachMedia(video);
+
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+            console.log("HLS manifest đã được parse thành công");
+            // Đảm bảo video tự động phát và replay
+            video.muted = true; // Cần thiết cho autoplay
+            video.loop = true;
+            video.play().catch((err) => {
+                console.error("Lỗi khi phát video:", err);
+            });
+        });
+
+        // Đảm bảo video tự động replay khi kết thúc
+        video.addEventListener("ended", () => {
+            console.log("Video kết thúc, tự động replay...");
+            video.currentTime = 0;
+            video.play().catch((err) => {
+                console.error("Lỗi khi replay video:", err);
+            });
+        });
+
+        hls.on(Hls.Events.ERROR, (event, data) => {
+            console.error("HLS Error:", data);
+            if (data.fatal) {
+                switch (data.type) {
+                    case Hls.ErrorTypes.NETWORK_ERROR:
+                        console.error("Lỗi mạng, đang thử lại...");
+                        hls.startLoad();
+                        break;
+                    case Hls.ErrorTypes.MEDIA_ERROR:
+                        console.error("Lỗi media, đang phục hồi...");
+                        hls.recoverMediaError();
+                        break;
+                    default:
+                        console.error("Lỗi không thể phục hồi");
+                        hls.destroy();
+                        break;
+                }
+            }
+        });
+    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        // Nếu trình duyệt hỗ trợ HLS gốc (ví dụ: Safari)
+        console.log("Sử dụng HLS gốc (Safari)");
+        video.src = hlsUrl;
+        video.muted = true; // Cần thiết cho autoplay
+        video.loop = true;
+        video.addEventListener("loadedmetadata", () => {
+            video.play().catch((err) => {
+                console.error("Lỗi khi phát video:", err);
+            });
+        });
+        // Đảm bảo video tự động replay khi kết thúc
+        video.addEventListener("ended", () => {
+            console.log("Video kết thúc, tự động replay...");
+            video.currentTime = 0;
+            video.play().catch((err) => {
+                console.error("Lỗi khi replay video:", err);
+            });
+        });
+        video.addEventListener("error", (e) => {
+            console.error("Lỗi video element:", e);
+        });
+    } else {
+        console.error("Trình duyệt không hỗ trợ HLS!");
+    }
+});
