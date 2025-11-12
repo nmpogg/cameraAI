@@ -5,7 +5,7 @@ console.log("Script.js loading...");
 // ========================================
 
 class TrafficViolationSystem {
-    constructor(videoPath = "video.mp4") {
+    constructor() {
         console.log("🚀 Initializing TrafficViolationSystem...");
         console.log("📊 Generating sample data...");
         this.violations = this.generateSampleData();
@@ -13,7 +13,6 @@ class TrafficViolationSystem {
         this.filteredViolations = [...this.violations];
         this.currentVideoTime = 0;
         this.isVideoPlaying = false;
-        this.videoPath = videoPath;
 
         console.log("🔧 Starting initialization...");
         this.init();
@@ -22,7 +21,11 @@ class TrafficViolationSystem {
     // Khởi tạo hệ thống
     init() {
         console.log("Setting up system...");
-        // Bỏ thiết lập điều khiển video và mô phỏng
+        try {
+            this.setupVideoControls();
+        } catch (error) {
+            console.error("Error setting up video controls:", error);
+        }
 
         try {
             this.setupSearchAndFilter();
@@ -114,7 +117,7 @@ class TrafficViolationSystem {
                     licenseDate: "05/10/2010",
                     licensePlace: "Sở GT-VT Thái Nguyên",
                 },
-                image: "./run/20251111_164500/violation_id_1837_plate_20RD03920.jpg",
+                image: 'this.generateViolationImage("20RD-03920")',
                 status: "Chưa xử lý",
             },
             {
@@ -165,7 +168,7 @@ class TrafficViolationSystem {
                     licenseDate: "19/02/2015",
                     licensePlace: "Sở GT-VT Hà Nội",
                 },
-                image: "./run/20251111_164500/violation_id_1898_plate_29G276162.jpg",
+                image: 'this.generateViolationImage("29G2-76162")',
                 status: "Đã xử lý",
             },
             {
@@ -215,7 +218,7 @@ class TrafficViolationSystem {
                     licenseDate: "11/07/2009",
                     licensePlace: "Sở GT-VT Hà Nội",
                 },
-                image: "./run/20251111_164500/violation_id_1909_plate_29B167018.jpg",
+                image: 'this.generateViolationImage("29B1-67018")',
                 status: "Chưa xử lý",
             },
             {
@@ -265,7 +268,7 @@ class TrafficViolationSystem {
                     licenseDate: "25/03/2012",
                     licensePlace: "Sở GT-VT Thái Nguyên",
                 },
-                image: "./run/20251111_164500/violation_id_2219_plate_20A159678.jpg",
+                image: 'this.generateViolationImage("20A1-69678")',
                 status: "Đã xử lý",
             },
             {
@@ -317,7 +320,7 @@ class TrafficViolationSystem {
                     licenseDate: "30/08/2005",
                     licensePlace: "Sở GT-VT Đồng Nai",
                 },
-                image: "./run/20251111_164500/violation_id_2172_plate_60MD06754.jpg",
+                image: 'this.generateViolationImage("60MD-06754")',
                 status: "Chưa xử lý",
             },
             {
@@ -369,7 +372,7 @@ class TrafficViolationSystem {
                     licenseDate: "10/12/2013",
                     licensePlace: "Sở GT-VT Phú Thọ",
                 },
-                image: "./run/20251111_164500/violation_id_2137_plate_19N104944.jpg",
+                image: 'this.generateViolationImage("19N1-04944")',
                 status: "Đã xử lý",
             },
             {
@@ -419,7 +422,7 @@ class TrafficViolationSystem {
                     licenseDate: "20/05/1995",
                     licensePlace: "Sở GT-VT Hà Nội",
                 },
-                image: "./run/20251111_164500/violation_id_2350_plate_29MA4604.jpg",
+                image: 'this.generateViolationImage("29MA-4604")',
                 status: "Chưa xử lý",
             },
             {
@@ -471,7 +474,7 @@ class TrafficViolationSystem {
                     licenseDate: "14/02/2018",
                     licensePlace: "Sở GT-VT Hà Nội",
                 },
-                image: "./run/20251111_164500/violation_id_2569_plate_30N80619.jpg",
+                image: 'this.generateViolationImage("30N8-0619")',
                 status: "Đã xử lý",
             },
             {
@@ -523,7 +526,7 @@ class TrafficViolationSystem {
                     licenseDate: "01/08/2011",
                     licensePlace: "Sở GT-VT Hà Nội",
                 },
-                image: "./run/20251111_164500/violation_id_2620_plate_29AA08954_L2.jpg",
+                image: 'this.generateViolationImage("29AA-08954")',
                 status: "Chưa xử lý",
             },
             {
@@ -575,7 +578,7 @@ class TrafficViolationSystem {
                     licenseDate: "12/10/2000",
                     licensePlace: "Sở GT-VT Nam Định",
                 },
-                image: "./run/20251111_164500/violation_id_2549_plate_18F102528.jpg",
+                image: 'this.generateViolationImage("18F1-02528")',
                 status: "Đã xử lý",
             },
             {
@@ -627,7 +630,7 @@ class TrafficViolationSystem {
                     licenseDate: "10/08/2019",
                     licensePlace: "Sở GT-VT Hà Nội",
                 },
-                image: "./run/20251111_164500/violation_id_2861_plate_29C163811.jpg",
+                image: 'this.generateViolationImage("29C1-63811")',
                 status: "Chưa xử lý",
             },
         ];
@@ -692,18 +695,9 @@ class TrafficViolationSystem {
         const progressBar = document.getElementById("progress-bar");
         const videoTime = document.getElementById("video-time");
         const videoOverlay = document.getElementById("video-overlay");
-        const volumeBtn = document.getElementById("volume-btn");
-        const volumeIcon = document.getElementById("volume-icon");
-        const fullscreenBtn = document.getElementById("fullscreen-btn");
-        const fullscreenIcon = document.getElementById("fullscreen-icon");
-        const videoContainer = document.querySelector(".video-container");
 
-        // Load video từ đường dẫn
-        this.loadVideo(video);
-
-        // Khởi tạo volume
-        this.isMuted = video.muted;
-        this.volume = video.volume;
+        // Tạo video demo (có thể thay thế bằng video thật)
+        this.createDemoVideo();
 
         // Nút play/pause chính
         const togglePlayPause = () => {
@@ -720,118 +714,10 @@ class TrafficViolationSystem {
             }
         };
 
-        // Toggle volume (mute/unmute)
-        const toggleVolume = () => {
-            if (video.muted) {
-                video.muted = false;
-                volumeIcon.className = "fas fa-volume-up text-sm";
-            } else {
-                video.muted = true;
-                volumeIcon.className = "fas fa-volume-mute text-sm";
-            }
-            this.isMuted = video.muted;
-        };
-
-        // Toggle fullscreen
-        const toggleFullscreen = () => {
-            if (
-                !document.fullscreenElement &&
-                !document.webkitFullscreenElement &&
-                !document.mozFullScreenElement &&
-                !document.msFullscreenElement
-            ) {
-                // Vào fullscreen
-                if (videoContainer.requestFullscreen) {
-                    videoContainer.requestFullscreen();
-                } else if (videoContainer.webkitRequestFullscreen) {
-                    videoContainer.webkitRequestFullscreen();
-                } else if (videoContainer.mozRequestFullScreen) {
-                    videoContainer.mozRequestFullScreen();
-                } else if (videoContainer.msRequestFullscreen) {
-                    videoContainer.msRequestFullscreen();
-                } else if (video.requestFullscreen) {
-                    video.requestFullscreen();
-                } else if (video.webkitRequestFullscreen) {
-                    video.webkitRequestFullscreen();
-                } else if (video.mozRequestFullScreen) {
-                    video.mozRequestFullScreen();
-                } else if (video.msRequestFullscreen) {
-                    video.msRequestFullscreen();
-                }
-            } else {
-                // Thoát fullscreen
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                }
-            }
-        };
-
-        // Cập nhật icon fullscreen
-        const updateFullscreenIcon = () => {
-            if (fullscreenIcon) {
-                if (
-                    document.fullscreenElement ||
-                    document.webkitFullscreenElement ||
-                    document.mozFullScreenElement ||
-                    document.msFullscreenElement
-                ) {
-                    fullscreenIcon.className = "fas fa-compress text-sm";
-                } else {
-                    fullscreenIcon.className = "fas fa-expand text-sm";
-                }
-            }
-        };
-
         // Sự kiện click
         playPauseBtn.addEventListener("click", togglePlayPause);
         mainPlayPause.addEventListener("click", togglePlayPause);
         videoOverlay.addEventListener("click", togglePlayPause);
-
-        if (volumeBtn) {
-            volumeBtn.addEventListener("click", toggleVolume);
-        }
-
-        if (fullscreenBtn) {
-            fullscreenBtn.addEventListener("click", toggleFullscreen);
-        }
-
-        // Double click để vào fullscreen
-        video.addEventListener("dblclick", toggleFullscreen);
-        if (videoContainer) {
-            videoContainer.addEventListener("dblclick", (e) => {
-                if (e.target !== video) {
-                    toggleFullscreen();
-                }
-            });
-        }
-
-        // Phím tắt: F11 hoặc F để vào fullscreen, Space để play/pause, M để mute
-        document.addEventListener("keydown", (e) => {
-            // Không xử lý nếu đang focus vào input
-            if (
-                e.target.tagName === "INPUT" ||
-                e.target.tagName === "TEXTAREA"
-            ) {
-                return;
-            }
-
-            if (e.key === "f" || e.key === "F" || e.key === "F11") {
-                e.preventDefault();
-                toggleFullscreen();
-            } else if (e.key === " " || e.key === "Spacebar") {
-                e.preventDefault();
-                togglePlayPause();
-            } else if (e.key === "m" || e.key === "M") {
-                e.preventDefault();
-                toggleVolume();
-            }
-        });
 
         // Video events
         video.addEventListener("timeupdate", () => {
@@ -856,195 +742,9 @@ class TrafficViolationSystem {
             playPauseIcon.className = "fas fa-play text-2xl";
             mainPlayIcon.className = "fas fa-play text-lg";
         });
-
-        // Ẩn overlay khi video bắt đầu phát
-        video.addEventListener("play", () => {
-            if (videoOverlay) {
-                videoOverlay.style.opacity = "0";
-            }
-        });
-
-        // Hiển thị overlay khi video dừng
-        video.addEventListener("pause", () => {
-            if (videoOverlay) {
-                videoOverlay.style.opacity = "1";
-            }
-        });
-
-        // Cập nhật volume icon khi volume thay đổi
-        const updateVolumeIcon = () => {
-            if (!volumeIcon) return;
-            if (video.muted || video.volume === 0) {
-                volumeIcon.className = "fas fa-volume-mute text-sm";
-            } else if (video.volume < 0.5) {
-                volumeIcon.className = "fas fa-volume-down text-sm";
-            } else {
-                volumeIcon.className = "fas fa-volume-up text-sm";
-            }
-        };
-
-        video.addEventListener("volumechange", updateVolumeIcon);
-
-        // Cập nhật icon volume khi trang load
-        updateVolumeIcon();
-
-        // Xử lý thay đổi fullscreen (cập nhật icon và ẩn/hiện overlay)
-        const handleFullscreenChange = () => {
-            updateFullscreenIcon();
-            if (videoOverlay) {
-                const isFullscreen = !!(
-                    document.fullscreenElement ||
-                    document.webkitFullscreenElement ||
-                    document.mozFullScreenElement ||
-                    document.msFullscreenElement
-                );
-                if (isFullscreen) {
-                    videoOverlay.style.display = "none";
-                } else {
-                    videoOverlay.style.display = "flex";
-                }
-            }
-        };
-
-        // Fullscreen change events (hỗ trợ đa trình duyệt)
-        document.addEventListener("fullscreenchange", handleFullscreenChange);
-        document.addEventListener(
-            "webkitfullscreenchange",
-            handleFullscreenChange
-        );
-        document.addEventListener(
-            "mozfullscreenchange",
-            handleFullscreenChange
-        );
-        document.addEventListener("MSFullscreenChange", handleFullscreenChange);
     }
 
-    // Load video từ đường dẫn
-    loadVideo(video) {
-        if (!video) {
-            console.error("Video element not found");
-            return;
-        }
-
-        // Đặt đường dẫn video
-        const source = video.querySelector("source");
-        if (source) {
-            source.src = this.videoPath;
-            video.load(); // Tải lại video với đường dẫn mới
-            console.log(`✅ Video loaded from: ${this.videoPath}`);
-        } else {
-            // Nếu không có thẻ source, tạo mới
-            const newSource = document.createElement("source");
-            newSource.src = this.videoPath;
-            newSource.type = "video/mp4";
-            video.appendChild(newSource);
-            video.load();
-            console.log(
-                `✅ Video source created and loaded from: ${this.videoPath}`
-            );
-        }
-
-        // Xử lý lỗi khi không tải được video
-        const errorHandler = (e) => {
-            console.error("Error loading video:", e);
-            console.error(`Video path: ${this.videoPath}`);
-
-            const error = video.error;
-            if (error) {
-                let errorMessage = "Không thể tải video";
-                switch (error.code) {
-                    case error.MEDIA_ERR_ABORTED:
-                        errorMessage = "Video bị hủy tải";
-                        break;
-                    case error.MEDIA_ERR_NETWORK:
-                        errorMessage = "Lỗi mạng khi tải video";
-                        break;
-                    case error.MEDIA_ERR_DECODE:
-                        errorMessage = "Lỗi giải mã video";
-                        break;
-                    case error.MEDIA_ERR_SRC_NOT_SUPPORTED:
-                        errorMessage = "Định dạng video không được hỗ trợ";
-                        break;
-                }
-                console.error(`Error message: ${errorMessage}`);
-
-                // Hiển thị thông báo lỗi trong video container
-                this.showVideoError(errorMessage);
-            }
-        };
-
-        // Chỉ thêm event listener một lần
-        video.removeEventListener("error", errorHandler);
-        video.addEventListener("error", errorHandler);
-
-        // Kiểm tra khi video đã sẵn sàng
-        video.addEventListener("loadedmetadata", () => {
-            console.log("Video metadata loaded");
-            console.log(`Video duration: ${video.duration} seconds`);
-            console.log(
-                `Video dimensions: ${video.videoWidth}x${video.videoHeight}`
-            );
-
-            // Ẩn thông báo lỗi nếu có
-            this.hideVideoError();
-        });
-
-        // Kiểm tra khi video có thể phát được
-        video.addEventListener("canplay", () => {
-            console.log("Video can play");
-            this.hideVideoError();
-        });
-    }
-
-    // Hiển thị thông báo lỗi video
-    showVideoError(message) {
-        const container = document.querySelector(".video-container");
-        if (!container) return;
-
-        // Kiểm tra xem đã có thông báo lỗi chưa
-        let errorDiv = container.querySelector(".video-error-message");
-        if (!errorDiv) {
-            errorDiv = document.createElement("div");
-            errorDiv.className =
-                "video-error-message absolute inset-0 bg-black bg-opacity-75 flex items-center justify-center z-10";
-            container.appendChild(errorDiv);
-        }
-
-        errorDiv.innerHTML = `
-            <div class="text-center text-white p-6">
-                <i class="fas fa-exclamation-triangle text-4xl mb-4 text-yellow-400"></i>
-                <p class="text-lg font-semibold mb-2">${message}</p>
-                <p class="text-sm text-gray-300 mb-4">Đường dẫn: ${this.videoPath}</p>
-                <button onclick="window.trafficSystem && window.trafficSystem.createCanvasAnimation()" 
-                        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                    <i class="fas fa-play mr-2"></i>
-                    Sử dụng demo animation
-                </button>
-            </div>
-        `;
-    }
-
-    // Ẩn thông báo lỗi video
-    hideVideoError() {
-        const container = document.querySelector(".video-container");
-        if (container) {
-            const errorDiv = container.querySelector(".video-error-message");
-            if (errorDiv) {
-                errorDiv.remove();
-            }
-        }
-    }
-
-    // Phương thức để thay đổi đường dẫn video
-    setVideoPath(videoPath) {
-        this.videoPath = videoPath;
-        const video = document.getElementById("surveillance-video");
-        if (video) {
-            this.loadVideo(video);
-        }
-    }
-
-    // Tạo video demo (fallback nếu video không tải được)
+    // Tạo video demo
     createDemoVideo() {
         const video = document.getElementById("surveillance-video");
         // Tạo canvas animation cho demo
@@ -1312,49 +1012,46 @@ class TrafficViolationSystem {
         const time = new Date(violation.time);
         const timeStr = time.toLocaleString("vi-VN");
 
+        const statusColors = {
+            "Chưa xử lý": "bg-yellow-100 text-yellow-800",
+            "Đã xử lý": "bg-green-100 text-green-800",
+            "Chờ xác nhận": "bg-blue-100 text-blue-800",
+        };
+
+        const statusColor =
+            statusColors[violation.status] || "bg-gray-100 text-gray-800";
+
         card.innerHTML = `
-            <div class="grid grid-cols-4">
-
-            <div class="col-span-2 flex mb-3">
-            <div>
-                <h3 class="font-semibold text-lg text-gray-900">${violation.licensePlate}</h3>
-            </div>
-          
-            
-            </div>
-
-            <div class="col-span-2">
-                <span class="px-2 py-1 rounded-full text-xs font-small text-red-500 bg-red-100 ">
-                    VƯỢT ĐÈN ĐỎ
+            <div class="flex items-start justify-between mb-3">
+                <div>
+                    <h3 class="font-semibold text-lg text-gray-900">${violation.licensePlate}</h3>
+                    <p class="text-sm text-gray-600">${violation.location}</p>
+                </div>
+                <span class="px-2 py-1 rounded-full text-xs font-medium ${statusColor}">
+                    ${violation.status}
                 </span>
             </div>
-
-            <div class="col-span-2 ">
-            <div class="flex items-center text-sm text-gray-600">
-                <i class="fas fa-map-marker-alt w-4 mr-2"></i>
-                <span class="font-medium text-gray-700">ID: ${violation.id}</span>
-            </div>
-
-            <div class="flex items-center text-sm text-gray-600">
-                <i class="fas fa-clock w-4 mr-2"></i>
-                <span>${timeStr}</span>
-            </div>
-
-
-             <div class="flex items-center text-sm text-gray-600">
-                <i class="fas fa-car w-4 mr-2"></i>
-                <span>${violation.vehicle.type}</span>
-            </div>   
-            </div>
-
-            </div>
             
-
+            <div class="space-y-2 mb-4">
+                <div class="flex items-center text-sm text-gray-600">
+                    <i class="fas fa-clock w-4 mr-2"></i>
+                    <span>${timeStr}</span>
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                    <i class="fas fa-tachometer-alt w-4 mr-2"></i>
+                    <span>${violation.speed}</span>
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                    <i class="fas fa-map-marker-alt w-4 mr-2"></i>
+                    <span class="font-medium text-gray-700">ID: ${violation.id}</span>
+                </div>
+            </div>
             
             <div class="flex space-x-2">
-                <button class="flex-1 rounded-md text-sm font-medium transition-colors view-details-btn" 
+                <button class="flex-1 bg-blue-600 text-white py-2 px-3 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors view-details-btn" 
                         data-violation-id="${violation.id}">
-                    <i class="fas fa-play-circle mr-1"></i>
+                    <i class="fas fa-eye mr-1"></i>
+                    Xem chi tiết
                 </button>
             </div>
         `;
@@ -1531,9 +1228,8 @@ class TrafficViolationSystem {
 
 // Khởi tạo hệ thống khi trang được tải
 let systemInitialized = false;
-let trafficSystem = null;
 
-function initializeSystem(videoPath) {
+function initializeSystem() {
     if (systemInitialized) {
         console.log("System already initialized, skipping...");
         return;
@@ -1543,15 +1239,7 @@ function initializeSystem(videoPath) {
     console.log("Starting system initialization");
 
     try {
-        // Cho phép truyền đường dẫn video từ URL parameter hoặc sử dụng giá trị mặc định
-        const urlParams = new URLSearchParams(window.location.search);
-        const videoPathFromUrl =
-            urlParams.get("video") || videoPath || "video.mp4";
-
-        trafficSystem = new TrafficViolationSystem(videoPathFromUrl);
-
-        // Cho phép truy cập hệ thống từ global scope để có thể thay đổi video path
-        window.trafficSystem = trafficSystem;
+        new TrafficViolationSystem();
     } catch (error) {
         console.error("Error initializing TrafficViolationSystem:", error);
         // Vẫn cố gắng hiển thị danh sách vi phạm ngay cả khi có lỗi
@@ -1579,89 +1267,3 @@ if (document.readyState !== "loading") {
     console.log("Document is already loaded, initializing immediately");
     initializeSystem();
 }
-
-document.addEventListener("DOMContentLoaded", async () => {
-    const video = document.getElementById("surveillance-video");
-
-    if (!video) {
-        console.error("Không tìm thấy video element!");
-        return;
-    }
-
-    // Đây là đường dẫn mà server Express cung cấp ở bước 2
-    const hlsUrl = "http://localhost:3000/hls/playlist.m3u8";
-
-    if (Hls.isSupported()) {
-        // Nếu trình duyệt hỗ trợ HLS.js
-        console.log("Sử dụng HLS.js");
-        const hls = new Hls({
-            debug: true,
-            enableWorker: true,
-        });
-        hls.loadSource(hlsUrl);
-        hls.attachMedia(video);
-
-        hls.on(Hls.Events.MANIFEST_PARSED, () => {
-            console.log("HLS manifest đã được parse thành công");
-            // Đảm bảo video tự động phát và replay
-            video.muted = true; // Cần thiết cho autoplay
-            video.loop = true;
-            video.play().catch((err) => {
-                console.error("Lỗi khi phát video:", err);
-            });
-        });
-
-        // Đảm bảo video tự động replay khi kết thúc
-        video.addEventListener("ended", () => {
-            console.log("Video kết thúc, tự động replay...");
-            video.currentTime = 0;
-            video.play().catch((err) => {
-                console.error("Lỗi khi replay video:", err);
-            });
-        });
-
-        hls.on(Hls.Events.ERROR, (event, data) => {
-            console.error("HLS Error:", data);
-            if (data.fatal) {
-                switch (data.type) {
-                    case Hls.ErrorTypes.NETWORK_ERROR:
-                        console.error("Lỗi mạng, đang thử lại...");
-                        hls.startLoad();
-                        break;
-                    case Hls.ErrorTypes.MEDIA_ERROR:
-                        console.error("Lỗi media, đang phục hồi...");
-                        hls.recoverMediaError();
-                        break;
-                    default:
-                        console.error("Lỗi không thể phục hồi");
-                        hls.destroy();
-                        break;
-                }
-            }
-        });
-    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-        // Nếu trình duyệt hỗ trợ HLS gốc (ví dụ: Safari)
-        console.log("Sử dụng HLS gốc (Safari)");
-        video.src = hlsUrl;
-        video.muted = true; // Cần thiết cho autoplay
-        video.loop = true;
-        video.addEventListener("loadedmetadata", () => {
-            video.play().catch((err) => {
-                console.error("Lỗi khi phát video:", err);
-            });
-        });
-        // Đảm bảo video tự động replay khi kết thúc
-        video.addEventListener("ended", () => {
-            console.log("Video kết thúc, tự động replay...");
-            video.currentTime = 0;
-            video.play().catch((err) => {
-                console.error("Lỗi khi replay video:", err);
-            });
-        });
-        video.addEventListener("error", (e) => {
-            console.error("Lỗi video element:", e);
-        });
-    } else {
-        console.error("Trình duyệt không hỗ trợ HLS!");
-    }
-});
