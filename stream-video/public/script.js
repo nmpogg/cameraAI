@@ -116,6 +116,7 @@ class TrafficViolationSystem {
                 },
                 image: "./run/20251111_164500/violation_id_1837_plate_20RD03920.jpg",
                 status: "Chưa xử lý",
+                avatar: "./run/nhat.jpeg",
             },
             {
                 id: 1898,
@@ -167,6 +168,7 @@ class TrafficViolationSystem {
                 },
                 image: "./run/20251111_164500/violation_id_1898_plate_29G276162.jpg",
                 status: "Đã xử lý",
+                avatar: "./run/long.jpg",
             },
             {
                 id: 1909,
@@ -217,6 +219,7 @@ class TrafficViolationSystem {
                 },
                 image: "./run/20251111_164500/violation_id_1909_plate_29B167018.jpg",
                 status: "Chưa xử lý",
+                avatar: "./run/huy.jpg",
             },
             {
                 id: 2219,
@@ -267,6 +270,7 @@ class TrafficViolationSystem {
                 },
                 image: "./run/20251111_164500/violation_id_2219_plate_20A159678.jpg",
                 status: "Đã xử lý",
+                avatar: "./run/huy1.jpg",
             },
             {
                 id: 2172,
@@ -319,6 +323,7 @@ class TrafficViolationSystem {
                 },
                 image: "./run/20251111_164500/violation_id_2172_plate_60MD06754.jpg",
                 status: "Chưa xử lý",
+                avatar: "./run/long.jpg",
             },
             {
                 id: 2137,
@@ -371,6 +376,7 @@ class TrafficViolationSystem {
                 },
                 image: "./run/20251111_164500/violation_id_2137_plate_19N104944.jpg",
                 status: "Đã xử lý",
+                avatar: "./run/huy1.jpg",
             },
             {
                 id: 2350,
@@ -421,6 +427,7 @@ class TrafficViolationSystem {
                 },
                 image: "./run/20251111_164500/violation_id_2350_plate_29MA4604.jpg",
                 status: "Chưa xử lý",
+                avatar: "./run/vip10.jpg",
             },
             {
                 id: 2569,
@@ -473,6 +480,7 @@ class TrafficViolationSystem {
                 },
                 image: "./run/20251111_164500/violation_id_2569_plate_30N80619.jpg",
                 status: "Đã xử lý",
+                avatar: "./run/nam.jpg",
             },
             {
                 id: 2620,
@@ -525,6 +533,7 @@ class TrafficViolationSystem {
                 },
                 image: "./run/20251111_164500/violation_id_2620_plate_29AA08954_L2.jpg",
                 status: "Chưa xử lý",
+                avatar: "./run/long.jpg",
             },
             {
                 id: 2549,
@@ -577,6 +586,7 @@ class TrafficViolationSystem {
                 },
                 image: "./run/20251111_164500/violation_id_2549_plate_18F102528.jpg",
                 status: "Đã xử lý",
+                avatar: "./run/hnn.jpg",
             },
             {
                 id: 2861,
@@ -629,6 +639,7 @@ class TrafficViolationSystem {
                 },
                 image: "./run/20251111_164500/violation_id_2861_plate_29C163811.jpg",
                 status: "Chưa xử lý",
+                avatar: "./run/nhat.jpeg",
             },
         ];
     }
@@ -1485,7 +1496,8 @@ class TrafficViolationSystem {
             violation.owner.phone;
         document.getElementById("owner-email").textContent =
             violation.owner.email;
-        document.getElementById("owner-photo").src = "./run/nhat.jpeg";
+        document.getElementById("owner-photo").src = violation.avatar;
+
         document.getElementById("owner-license").textContent =
             violation.owner.license;
         document.getElementById("owner-license-class").textContent =
