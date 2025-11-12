@@ -291,6 +291,18 @@
             width: 40px;
         }
 
+
+        #vehicle-reverse {
+            background-color: #18fff3;
+            /* Xanh */
+            left: 199.5px;
+            /* (250 + 375)/2 = 312.5 (giữa làn phải) */
+            transform: translateX(-50%);
+            top: -120px;
+            animation: move-reverse-left 5s linear infinite;
+            width: 40px;
+        }
+
         /* Xe đi thẳng: Vượt Vạch 1, Vượt Vạch 2 */
         @keyframes move-straight {
             0% {
@@ -333,6 +345,25 @@
             }
 
             /* Rẽ phải vào đường ngang */
+        }
+
+        /* Xe đi ngược: từ trên xuống xuống rồi rẽ trái */
+        @keyframes move-reverse-left {
+            0% {
+                transform: translate(-50%, 0) rotate(0deg);
+            }
+
+            59% {
+                transform: translate(-50%, 410px) rotate(0deg);
+            }
+
+            60% {
+                transform: translate(100px, 410px) rotate(-90deg);
+            }
+
+            100% {
+                transform: translate(260px, 410px) rotate(-90deg);
+            }
         }
 
         /* --- Đường đi mô phỏng (Path) --- */
@@ -485,6 +516,8 @@
             <div class="vehicle" id="vehicle-straight">ID 03</div>
             <div class="vehicle" id="vehicle-right">ID 02</div>
             <div class="vehicle" id="vehicle-mid">ID 01</div>
+            <div class="vehicle" id="vehicle-reverse">ID 04</div>
+
 
         </div>
 
@@ -531,6 +564,8 @@
                     vehicle.style.animationName = 'move-straight';
                 } else if (vehicle.id === 'vehicle-right') {
                     vehicle.style.animationName = 'move-right';
+                } else if (vehicle.id === 'vehicle-reverse') {
+                    vehicle.style.animationName = 'move-reverse-left';
                 }
             });
         }
