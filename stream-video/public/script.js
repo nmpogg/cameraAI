@@ -1014,27 +1014,11 @@ class TrafficViolationSystem {
             <div class="flex items-start justify-between mb-3">
                 <div>
                     <h3 class="font-semibold text-lg text-gray-900">${violation.licensePlate}</h3>
-                    <p class="text-sm text-gray-600">${violation.location}</p>
                 </div>
-                <span class="px-2 py-1 rounded-full text-xs font-medium ${statusColor}">
-                    ${violation.status}
-                </span>
+              
             </div>
             
-            <div class="space-y-2 mb-4">
-                <div class="flex items-center text-sm text-gray-600">
-                    <i class="fas fa-clock w-4 mr-2"></i>
-                    <span>${timeStr}</span>
-                </div>
-                <div class="flex items-center text-sm text-gray-600">
-                    <i class="fas fa-tachometer-alt w-4 mr-2"></i>
-                    <span>${violation.speed}</span>
-                </div>
-                <div class="flex items-center text-sm text-gray-600">
-                    <i class="fas fa-map-marker-alt w-4 mr-2"></i>
-                    <span class="font-medium text-gray-700">ID: ${violation.id}</span>
-                </div>
-            </div>
+
             
             <div class="flex space-x-2">
                 <button class="flex-1 bg-blue-600 text-white py-2 px-3 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors view-details-btn" 

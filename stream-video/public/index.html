@@ -243,9 +243,9 @@
 
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[calc(100vh-140px)]">
+        <div class="grid  gap-6 h-[calc(100vh-140px)]">
             <!-- Video Section -->
-            <div class="lg:col-span-2">
+            <div class="">
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 h-full">
                     <div class="p-4 border-b border-gray-200">
                         <h2 class="text-lg font-semibold text-gray-900 flex items-center">
@@ -256,14 +256,29 @@
 
                     <div class="p-4 h-[calc(100%-80px)]">
                         <div class="video-container h-full bg-gray-900 rounded-lg overflow-hidden relative">
-                            <video id="surveillance-video" class="w-full h-full object-contain" controls
-                                preload="metadata">
-                                <!-- <source src="../video/output_demo2p.mp4" type="video/mp4"> -->
-                                <!-- Trình duyệt không hỗ trợ video. -->
+                            <video id="surveillance-video" class="w-full h-full object-contain" preload="metadata">
                             </video>
                             <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
                             <script>
+
+                                const videoElement = document.getElementById('surveillance-video');
+
+                                // 2. Định nghĩa hàm xử lý sự kiện nhấp chuột
+                                function togglePlay() {
+                                    // Kiểm tra trạng thái hiện tại của video
+                                    if (videoElement.paused) {
+                                        // Nếu video đang dừng, thì phát nó
+                                        videoElement.play();
+                                    } else {
+                                        // Nếu video đang chạy, thì dừng nó
+                                        videoElement.pause();
+                                    }
+                                }
+
+                                // 3. Gán hàm xử lý sự kiện cho sự kiện click
+                                videoElement.addEventListener('click', togglePlay);
+
                                 document.addEventListener('DOMContentLoaded', () => {
                                     const video = document.getElementById('surveillance-video');
 
@@ -271,6 +286,7 @@
                                         console.error('Không tìm thấy video element!');
                                         return;
                                     }
+
 
                                     // Đây là đường dẫn mà server Express cung cấp ở bước 2
                                     const hlsUrl = 'http://localhost:3000/hls/playlist.m3u8';
@@ -335,7 +351,7 @@
             </div>
 
             <!-- Control Panel -->
-            <div class="lg:col-span-1">
+            <div class="l">
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 h-full flex flex-col">
                     <div class="p-4 border-b border-gray-200">
                         <h2 class="text-lg font-semibold text-gray-900 flex items-center">
